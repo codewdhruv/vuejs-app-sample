@@ -1,0 +1,51 @@
+pipeline:
+  name: vuejs sample
+  identifier: vuejs_sample
+  projectIdentifier: DhrubaCI
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: dhrubaaccountconnector
+        repoName: vuejs-app-sample
+        build: <+input>
+  stages:
+    - stage:
+        name: Stage 1
+        identifier: Stage_1
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Update NPM
+                  identifier: Update_NPM
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: harnesscommunity/node-ci-image:18.9-latest
+                    shell: Sh
+                    command: sudo npm install -g npm
+              - step:
+                  type: Run
+                  name: Install Dependencies
+                  identifier: Install_Dependencies
+                  spec:
+                    shell: Sh
+                    command: npm install
+              - step:
+                  type: Run
+                  name: Run test for the application
+                  identifier: Run_test_for_the_application
+                  spec:
+                    shell: Sh
+                    command: npm run test:unit
