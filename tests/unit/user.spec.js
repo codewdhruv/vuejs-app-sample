@@ -12,7 +12,7 @@ describe("User List component unit tests: ", () => {
 
   test("Renders the list", () => {
     const wrapper = mount(UserList);
-    const name = "Anna Strong";
+    const name = "Jessica Adams";
 
     const user = wrapper.get('[data-user="user"]');
 
