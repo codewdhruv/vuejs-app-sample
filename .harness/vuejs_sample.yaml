@@ -49,3 +49,8 @@ pipeline:
                   spec:
                     shell: Sh
                     command: npm run test:unit
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - "**/*.xml"
